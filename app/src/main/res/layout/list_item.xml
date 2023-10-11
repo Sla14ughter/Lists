@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -33,12 +34,59 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
-        android:layout_marginBottom="16dp"
         android:text="Описание"
         android:textSize="9dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/delbtn"
         app:layout_constraintLeft_toRightOf="@+id/picture"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <Button
+        android:id="@+id/delbtn"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:backgroundTint="#FF0000"
+        android:padding="0px"
+        android:layout_marginEnd="10dp"
+        android:text="✖"
+        android:textColor="#FFFFFF"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/minusbtn"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:padding="0px"
+        android:layout_marginEnd="15dp"
+        android:text="-"
+        android:textColor="#FFFFFF"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/delbtn" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/minusbtn" />
+
+    <Button
+        android:id="@+id/plusbtn"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:padding="0px"
+        android:layout_marginEnd="5dp"
+        android:text="+"
+        android:textColor="#FFFFFF"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/amount" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
