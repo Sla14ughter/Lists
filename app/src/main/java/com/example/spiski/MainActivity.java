@@ -19,6 +19,6 @@ public class MainActivity extends AppCompatActivity {
         carsView.setAdapter(adapter);
     }
     private void setInitialData() {
-        cars.add(new Car("Матиз", R.string.matiz_descr, R.drawable.matiz));
+        cars.add(new Car("Матиз", R.string.matiz_descr, R.drawable.matiz, 1));
     }
 }

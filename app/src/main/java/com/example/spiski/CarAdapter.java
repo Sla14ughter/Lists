@@ -3,6 +3,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +35,23 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
         holder.pictureView.setImageResource(car.getPictureResource());
         holder.nameView.setText(car.getName());
         holder.descriptionView.setText(car.getDescriptionResource());
+        holder.plusbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                car.setAmount(car.getAmount() + 1);
+            }
+        });
+        holder.minusbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                car.setAmount(car.getAmount() - 1);
+            }
+        });
+        holder.delbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cars.remove(position);
+            }
+        });
     }
 
     @Override
@@ -44,12 +62,16 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView pictureView;
         final TextView nameView, descriptionView;
+        final Button plusbtn, minusbtn, delbtn;
 
         ViewHolder(View view) {
             super(view);
             pictureView = view.findViewById(R.id.picture);
             nameView = view.findViewById(R.id.name);
             descriptionView = view.findViewById(R.id.description);
+            plusbtn = view.findViewById(R.id.plusbtn);
+            minusbtn = view.findViewById(R.id.minusbtn);
+            delbtn = view.findViewById(R.id.delbtn);
         }
     }
 }
