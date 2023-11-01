@@ -21,4 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private void setInitialData() {
         cars.add(new Car("Матиз", R.string.matiz_descr, R.drawable.matiz, 1));
     }
+
+    public void addCar() {
+        setContentView(R.layout.activity_add);
+    }
 }

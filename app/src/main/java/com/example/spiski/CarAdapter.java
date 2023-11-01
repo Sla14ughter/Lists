@@ -35,21 +35,36 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
         holder.pictureView.setImageResource(car.getPictureResource());
         holder.nameView.setText(car.getName());
         holder.descriptionView.setText(car.getDescriptionResource());
+        holder.amountView.setText(Integer.toString(car.getAmount()));
         holder.plusbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                car.setAmount(car.getAmount() + 1);
+                int adapterPosition = holder.getAdapterPosition();
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    Car clickedCar = cars.get(adapterPosition);
+                    clickedCar.setAmount(clickedCar.getAmount() + 1);
+                    CheckAmount(car, holder, adapterPosition);
+                }
             }
         });
         holder.minusbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                car.setAmount(car.getAmount() - 1);
+                int adapterPosition = holder.getAdapterPosition();
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    Car clickedCar = cars.get(adapterPosition);
+                    clickedCar.setAmount(clickedCar.getAmount() - 1);
+                    CheckAmount(car, holder, adapterPosition);
+                }
             }
         });
         holder.delbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cars.remove(position);
+                int adapterPosition = holder.getAdapterPosition();
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    RemoveCar(adapterPosition);
+                }
             }
         });
     }
@@ -61,7 +76,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView pictureView;
-        final TextView nameView, descriptionView;
+        final TextView nameView, descriptionView, amountView;
         final Button plusbtn, minusbtn, delbtn;
 
         ViewHolder(View view) {
@@ -72,6 +87,19 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
             plusbtn = view.findViewById(R.id.plusbtn);
             minusbtn = view.findViewById(R.id.minusbtn);
             delbtn = view.findViewById(R.id.delbtn);
+            amountView = view.findViewById(R.id.amount);
         }
+    }
+
+    private void CheckAmount(Car car, ViewHolder holder, int position) {
+        if (car.getAmount() == 0)
+            RemoveCar(position);
+        else
+            holder.amountView.setText(Integer.toString(car.getAmount()));
+    }
+
+    private void RemoveCar(int position) {
+        cars.remove(position);
+        notifyItemRemoved(position);
     }
 }
