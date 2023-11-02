@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import com.squareup.picasso.Picasso;
 
 import android.Manifest;
 import android.app.Activity;
@@ -47,41 +48,11 @@ public class MainActivity extends AppCompatActivity {
                     if (data != null) {
                         Uri selectedImageUri = data.getData();
                         ImageView imageView = findViewById(R.id.imageView);
-                        try {
-                            InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
-                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                            Cursor cursor = getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
-                            if (cursor != null) {
-                                cursor.moveToFirst();
-                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                                String filePath = cursor.getString(columnIndex);
-                                cursor.close();
-                                ExifInterface exif = new ExifInterface(filePath);
-                                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                                int rotationAngle = 0;
-                                switch (orientation) {
-                                    case ExifInterface.ORIENTATION_ROTATE_90:
-                                        rotationAngle = 90;
-                                        break;
-                                    case ExifInterface.ORIENTATION_ROTATE_180:
-                                        rotationAngle = 180;
-                                        break;
-                                    case ExifInterface.ORIENTATION_ROTATE_270:
-                                        rotationAngle = 270;
-                                        break;
-                                }
-                                if (rotationAngle != 0) {
-                                    Matrix matrix = new Matrix();
-                                    matrix.postRotate(rotationAngle);
-                                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                                }
-                                imageView.setImageBitmap(bitmap);
-                            }
-                        }
-                        catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        int angle = 0;
+                        Picasso.get()
+                                .load(selectedImageUri)
+                                .rotate(angle)
+                                .into(imageView);
                     }
                 }
             }
