@@ -1,12 +1,14 @@
 package com.example.spiski;
 
+import android.graphics.Bitmap;
+
 class Car {
    private String name;
-   private int descriptionResource;
-   private int pictureResource;
+   private String descriptionResource;
+   private Bitmap pictureResource;
    private int amount;
 
-   public Car(String name, int description, int pictureResource, int amount) {
+   public Car(String name, String description, Bitmap pictureResource, int amount) {
       this.name = name;
       this.descriptionResource = description;
       this.pictureResource = pictureResource;
@@ -21,19 +23,19 @@ class Car {
       this.name = name;
    }
 
-   public int getDescriptionResource() {
+   public String getDescriptionResource() {
       return descriptionResource;
    }
 
-   public void setDescriptionResource(int descriptionResource) {
+   public void setDescriptionResource(String descriptionResource) {
       this.descriptionResource = descriptionResource;
    }
 
-   public int getPictureResource() {
+   public Bitmap getPictureResource() {
       return pictureResource;
    }
 
-   public void setPictureResource(int pictureResource) {
+   public void setPictureResource(Bitmap pictureResource) {
       this.pictureResource = pictureResource;
    }
 

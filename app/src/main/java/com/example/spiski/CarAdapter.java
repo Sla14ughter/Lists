@@ -32,7 +32,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Car car = cars.get(position);
-        holder.pictureView.setImageResource(car.getPictureResource());
+        holder.pictureView.setImageBitmap(car.getPictureResource());
         holder.nameView.setText(car.getName());
         holder.descriptionView.setText(car.getDescriptionResource());
         holder.amountView.setText(Integer.toString(car.getAmount()));
